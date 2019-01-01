@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Psychic Game</title>
+  </head>
+  <body>
+
+    <h1>Psychic Game</h1>
+    <h2>Guess what letter im thinking of!</h2>
+		<p id="wins"></p>
+		<p id="losses"></p>
+		<p id="guessesLeft"></p>
+		<p id="guessedSoFar"></p>
+    
+
+    <script>
+
+      // VARIABLES
+      // ==========================================================================
+      var letters = ["a","b","c","d","e","f"];
+      var wins = 0;
+		 var losses = 0;
+		 var guessesLeft = 9;
+		 var lettersGuessed = [];
+         var lossText = document.getElementById("losses");
+         var winText = document.getElementById("wins");
+         var guessesLeftText = document.getElementById("guessesLeft");
+         var guessedText = document.getElementById("guessedSoFar");
+         var answer = letters[Math.floor(Math.random() * letters.length)];
+      document.onkeyup = function(event) {
+      var userGuess = event.key;
+          if (userGuess !== answer){
+              guessesLeft--;
+              lettersGuessed.push(userGuess);
+              }
+             else if (userGuess === answer){
+              wins++;
+              guessesLeft = 9;
+              lettersGuessed =[];
+              answer = letters[Math.floor(Math.random() * letters.length)];
+              }
+          if (guessesLeft === 0){
+                losses--;
+                lettersGuessed = [];
+                guessesLeft = 9;
+                answer = letters[Math.floor(Math.random() * letters.length)];
+            }
+            lossText.textContent = ("losses: " + losses);
+            winText.textContent = ("wins: " + wins);
+            guessesLeftText.textContent = ("guesses left: " + guessesLeft );
+            guessedText.textContent = ("guessed so far : " +  lettersGuessed.join(', '));
+          }
+      </script>
+      </body>
+</html>
+
